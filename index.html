@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerMatch - หางานที่เหมาะกับคุณ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="scripst" href="scripst.js">
+  <style>
+    :root {
+      --primary-color: #4CAF50; /* สีเขียวหลัก */
+      --secondary-color: #388E3C; /* สีเขียวเข้ม */
+      --accent-color: #8BC34A; /* สีเขียวอ่อน */
+      --light-color: #f8f9fa;
+      --dark-color: #212529;
+      --success-color: #4cc9f0;
+      --warning-color: #f72585;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Kanit', sans-serif;
+      background-color: #f5f9f5; /* พื้นหลังสีเขียวอ่อน */
+      color: var(--dark-color);
+      line-height: 1.6;
+    }
+    
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .logo-icon {
+      font-size: 2rem;
+      color: var(--accent-color);
+    }
+    
+    .auth-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .btn {
+      padding: 0.5rem 1.25rem;
+      border-radius: 50px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      font-size: 0.9rem;
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+    }
+    
+    .btn-outline:hover {
+      background: white;
+      color: var(--primary-color);
+    }
+    
+    .btn-solid {
+      background: white;
+      color: var(--primary-color);
+    }
+    
+    .btn-solid:hover {
+      background: rgba(255, 255, 255, 0.9);
+    }
+    
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+    
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 1rem 1.5rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 3px;
+      background: var(--accent-color);
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover::after {
+      width: 70%;
+    }
+    
+    /* Hero Section */
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .hero-content {
+      flex: 1;
+      padding-right: 2rem;
+    }
+    
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      color: var(--dark-color);
+    }
+    
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: #555;
+      margin-bottom: 2rem;
+      max-width: 600px;
+    }
+    
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+    
+    .hero-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 1rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      transform: perspective(1000px) rotateY(-10deg);
+      transition: transform 0.5s ease;
+    }
+    
+    .hero-image img:hover {
+      transform: perspective(1000px) rotateY(0deg);
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    
+    .btn-primary {
+      background: var(--primary-color);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 50px;
+      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+    }
+    
+    .btn-primary:hover {
+      background: var(--secondary-color);
+      transform: translateY(-2px);
+      transition: all 0.5s ease;
+    }
+    
+    .btn-secondary {
+      background: white;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 50px;
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(76, 175, 80, 0.1);
+    }
+    
+    /* Features Section */
+    .section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      color: var(--dark-color);
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--accent-color);
+      border-radius: 2px;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .feature-card {
+      background: white;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-icon {
+      font-size: 2.5rem;
+      color: var(--accent-color);
+      margin-bottom: 1.5rem;
+    }
+    
+    .feature-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--dark-color);
+    }
+    
+    .feature-desc {
+      color: #666;
+    }
+    
+    /* Assessment Section */
+    .assessment {
+      background: linear-gradient(135deg, #f5f9f5, #e8f5e9);
+      border-radius: 1rem;
+      padding: 3rem;
+      margin-top: 3rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+    
+    .assessment-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: var(--dark-color);
+    }
+    
+    .steps {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 1;
+    }
+    
+    .step-number {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .step.active .step-number {
+      background: var(--secondary-color);
+    }
+    
+    .step.completed .step-number {
+      background: var(--success-color);
+    }
+    
+    .step-line {
+      position: absolute;
+      top: 25px;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: #ddd;
+      z-index: 0;
+    }
+    
+    .step-line-progress {
+      position: absolute;
+      top: 25px;
+      left: 0;
+      width: 33%;
+      height: 4px;
+      background: var(--success-color);
+      z-index: 0;
+      transition: width 0.5s ease;
+    }
+    
+    .step-text {
+      font-weight: 500;
+      color: #666;
+    }
+    
+    .step.active .step-text {
+      color: var(--dark-color);
+      font-weight: 600;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--dark-color);
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid #ddd;
+      border-radius: 0.5rem;
+      font-family: 'Kanit', sans-serif;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(139, 195, 74, 0.2);
+    }
+    
+    textarea.form-control {
+      min-height: 120px;
+      resize: vertical;
+    }
+    
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .skill-tag {
+      background: #e8f5e9;
+      color: var(--primary-color);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .skill-tag-remove {
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    
+    .add-skill {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .add-skill-input {
+      flex: 1;
+    }
+    
+    .add-skill-btn {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      padding: 0 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .add-skill-btn:hover {
+      background: var(--secondary-color);
+    }
+    
+    .generate-btn {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+    }
+    
+    .generate-btn:hover {
+      background: var(--secondary-color);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(76, 175, 80, 0.4);
+    }
+    
+    /* Job Categories Section */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .category-card {
+      background: white;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .category-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .category-image {
+      height: 180px;
+      width: 100%;
+      object-fit: cover;
+    }
+    
+    .category-info {
+      padding: 1.5rem;
+    }
+    
+    .category-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: var(--dark-color);
+    }
+    
+    .category-desc {
+      color: #666;
+      margin-bottom: 1rem;
+    }
+    
+    .category-stats {
+      display: flex;
+      justify-content: space-between;
+      color: #888;
+      font-size: 0.9rem;
+    }
+    
+    /* Job Matching Preview */
+    .matching-preview {
+      background: white;
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-top: 3rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+    
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .preview-title {
+      font-size: 1.5rem;
+      color: var(--dark-color);
+    }
+    
+    .match-percentage {
+      background: var(--success-color);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-weight: 600;
+    }
+    
+    .job-card {
+      background: #f8f9fa;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .job-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    
+    .job-title {
+      font-size: 1.25rem;
+      color: var(--primary-color);
+    }
+    
+    .job-company {
+      color: #666;
+      margin-bottom: 0.5rem;
+    }
+    
+    .job-meta {
+      display: flex;
+      gap: 1rem;
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    
+    .job-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    
+    .job-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .job-skill {
+      background: #e8f5e9;
+      color: var(--primary-color);
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+    }
+    
+    .job-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+    }
+    
+    .save-job {
+      background: transparent;
+      border: 1px solid #ddd;
+      color: #666;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .save-job:hover {
+      background: #f0f0f0;
+    }
+    
+    .apply-job {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .apply-job:hover {
+      background: var(--secondary-color);
+    }
+    
+    .navigation-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--dark-color);
+      color: white;
+      padding: 4rem 2rem 2rem;
+      margin-top: 5rem;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .footer-desc {
+      color: #aaa;
+      margin-bottom: 1.5rem;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .social-link {
+      color: white;
+      font-size: 1.25rem;
+      transition: color 0.3s ease;
+    }
+    
+    .social-link:hover {
+      color: var(--accent-color);
+    }
+    
+    .footer-title {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+    
+    .footer-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--accent-color);
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-link {
+      margin-bottom: 0.75rem;
+    }
+    
+    .footer-link a {
+      color: #aaa;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-link a:hover {
+      color: white;
+    }
+    
+    .copyright {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #444;
+      color: #888;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .hero-content {
+        padding-right: 0;
+        margin-bottom: 2rem;
+      }
+      
+      .cta-buttons {
+        justify-content: center;
+      }
+      
+      .topbar {
+        padding: 1rem;
+      }
+      
+      nav {
+        overflow-x: auto;
+        white-space: nowrap;
+        justify-content: flex-start;
+        padding: 0.5rem 1rem;
+      }
+      
+      nav a {
+        padding: 0.75rem 1rem;
+      }
+      
+      .section {
+        padding: 3rem 1rem;
+      }
+      
+      .assessment {
+        padding: 2rem 1rem;
+      }
+      
+      .steps {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+      }
+      
+      .step {
+        flex-direction: row;
+        gap: 1rem;
+        align-items: center;
+      }
+      
+      .step-line, .step-line-progress {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="topbar">
+      <div class="logo">
+        <i class="fas fa-briefcase logo-icon"></i>
+        <span>CareerMatch</span>
+      </div>
+      <div class="auth-buttons">
+        <button class="btn btn-outline">เข้าสู่ระบบ</button>
+        <button class="btn btn-solid">สมัครสมาชิก</button>
+      </div>
+    </div>
+    <nav>
+      <a href="#home">หน้าแรก</a>
+      <a href="#features">จุดเด่น</a>
+      <a href="#assessment">ประเมินความเหมาะสม</a>
+      <a href="#categories">ประเภทงาน</a>
+      <a href="#jobs">งานแนะนำ</a>
+      <a href="#about">เกี่ยวกับเรา</a>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">หางานที่เหมาะกับคุณที่สุด ด้วยระบบ AI</h1>
+      <p class="hero-subtitle">CareerMatch ใช้เทคโนโลยีปัญญาประดิษฐ์ในการวิเคราะห์ทักษะและบุคลิกภาพของคุณ เพื่อจับคู่งานที่เหมาะสมที่สุด เพิ่มโอกาสในการทำงานที่คุณรักและเติบโตในอาชีพ</p>
+      <div class="cta-buttons">
+        <button class="btn-primary" id="startAssessmentBtn">เริ่มประเมินทักษะ</button>
+        <button class="btn-secondary" id="browseJobsBtn">ค้นหางานทั้งหมด</button>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Job Matching">
+    </div>
+  </section>
+
+  <section id="features" class="section">
+    <h2 class="section-title">ทำไมต้องใช้ CareerMatch?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-robot"></i>
+        </div>
+        <h3 class="feature-title">ระบบจับคู่อัจฉริยะ</h3>
+        <p class="feature-desc">AI ของเราวิเคราะห์ทักษะและบุคลิกภาพของคุณ เพื่อหางานที่ตรงกับคุณมากที่สุด ไม่ใช่แค่ตามคำค้นหา</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <h3 class="feature-title">วิเคราะห์ตลาดงาน</h3>
+        <p class="feature-desc">ข้อมูลตำแหน่งงานที่ต้องการและทักษะที่ตลาดต้องการ พร้อมแนะนำเส้นทางพัฒนาอาชีพ</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-user-tie"></i>
+        </div>
+        <h3 class="feature-title">ที่ปรึกษาอาชีพ</h3>
+        <p class="feature-desc">ระบบให้คำแนะนำส่วนตัวเพื่อพัฒนาทักษะและเตรียมความพร้อมสำหรับตำแหน่งงานในฝัน</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="assessment" class="section">
+    <h2 class="section-title">ประเมินความเหมาะสมกับงาน</h2>
+    <div class="assessment">
+      <h3 class="assessment-title">กรอกข้อมูลเพื่อการจับคู่ที่แม่นยำ</h3>
+      
+      <div class="steps">
+        <div class="step-line"></div>
+        <div class="step-line-progress" id="stepProgress"></div>
+        
+        <div class="step active" id="step1">
+          <div class="step-number">1</div>
+          <div class="step-text">ข้อมูลพื้นฐาน</div>
+        </div>
+        
+        <div class="step" id="step2">
+          <div class="step-number">2</div>
+          <div class="step-text">ทักษะและประสบการณ์</div>
+        </div>
+        
+        <div class="step" id="step3">
+          <div class="step-number">3</div>
+          <div class="step-text">ความสนใจและบุคลิกภาพ</div>
+        </div>
+      </div>
+      
+      <div class="step-content" id="step1Content">
+        <div class="form-group">
+          <label for="name" class="form-label">ชื่อ-นามสกุล</label>
+          <input type="text" id="name" class="form-control" placeholder="กรุณากรอกชื่อและนามสกุล">
+        </div>
+        
+        <div class="form-group">
+          <label for="email" class="form-label">อีเมล</label>
+          <input type="email" id="email" class="form-control" placeholder="อีเมลที่สามารถติดต่อได้">
+        </div>
+        
+        <div class="form-group">
+          <label for="education" class="form-label">ระดับการศึกษา</label>
+          <select id="education" class="form-control">
+            <option value="">เลือกระดับการศึกษา</option>
+            <option value="high_school">มัธยมศึกษาตอนปลาย</option>
+            <option value="vocational">อาชีวศึกษา</option>
+            <option value="bachelor">ปริญญาตรี</option>
+            <option value="master">ปริญญาโท</option>
+            <option value="phd">ปริญญาเอก</option>
+            <option value="other">อื่นๆ</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="experience" class="form-label">ประสบการณ์ทำงาน (ปี)</label>
+          <input type="number" id="experience" class="form-control" min="0" max="50" value="0">
+        </div>
+        
+        <div class="navigation-buttons">
+          <button class="btn-primary" id="step1NextBtn">ต่อไป</button>
+        </div>
+      </div>
+      
+      <div class="step-content" id="step2Content" style="display: none;">
+        <div class="form-group">
+          <label class="form-label">ทักษะของคุณ</label>
+          <div class="skill-tags" id="skillTags">
+            <div class="skill-tag">
+              <span>HTML</span>
+              <i class="fas fa-times skill-tag-remove"></i>
+            </div>
+            <div class="skill-tag">
+              <span>CSS</span>
+              <i class="fas fa-times skill-tag-remove"></i>
+            </div>
+          </div>
+          <div class="add-skill">
+            <input type="text" class="form-control add-skill-input" id="newSkill" placeholder="เพิ่มทักษะ (เช่น JavaScript, Photoshop)">
+            <button class="add-skill-btn" onclick="addSkill()"><i class="fas fa-plus"></i></button>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="currentJob" class="form-label">ตำแหน่งงานปัจจุบัน (ถ้ามี)</label>
+          <input type="text" id="currentJob" class="form-control" placeholder="เช่น นักพัฒนาซอฟต์แวร์, นักบัญชี">
+        </div>
+        
+        <div class="form-group">
+          <label for="jobDescription" class="form-label">รายละเอียดงานที่ทำ</label>
+          <textarea id="jobDescription" class="form-control" placeholder="อธิบายงานและความรับผิดชอบหลัก"></textarea>
+        </div>
+        
+        <div class="navigation-buttons">
+          <button class="btn-secondary" id="step2BackBtn">ย้อนกลับ</button>
+          <button class="btn-primary" id="step2NextBtn">ต่อไป</button>
+        </div>
+      </div>
+      
+      <div class="step-content" id="step3Content" style="display: none;">
+        <div class="form-group">
+          <label for="interest" class="form-label">ประเภทงานที่สนใจ</label>
+          <select id="interest" class="form-control">
+            <option value="">เลือกประเภทงานที่สนใจ</option>
+            <option value="technology">เทคโนโลยีและไอที</option>
+            <option value="finance">การเงินและการธนาคาร</option>
+            <option value="marketing">การตลาดและขาย</option>
+            <option value="design">ออกแบบและครีเอทีฟ</option>
+            <option value="education">การศึกษาและการฝึกอบรม</option>
+            <option value="health">สุขภาพและการแพทย์</option>
+            <option value="engineering">วิศวกรรม</option>
+            <option value="other">อื่นๆ</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="personality" class="form-label">บุคลิกภาพการทำงาน</label>
+          <select id="personality" class="form-control">
+            <option value="">เลือกลักษณะบุคลิกภาพ</option>
+            <option value="analytical">วิเคราะห์และเป็นระบบ</option>
+            <option value="creative">สร้างสรรค์และคิดนอกกรอบ</option>
+            <option value="social">เข้าสังคมและทำงานเป็นทีม</option>
+            <option value="independent">ทำงานคนเดียวได้ดี</option>
+            <option value="leader">ผู้นำและบริหาร</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="salary" class="form-label">เงินเดือนที่คาดหวัง (บาท)</label>
+          <input type="number" id="salary" class="form-control" min="15000" max="500000" step="5000" value="25000">
+        </div>
+        
+        <div class="navigation-buttons">
+          <button class="btn-secondary" id="step3BackBtn">ย้อนกลับ</button>
+          <button class="btn-primary" id="step3SubmitBtn">ส่งแบบประเมิน</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="categories" class="section">
+    <h2 class="section-title">ประเภทงานยอดนิยม</h2>
+    <div class="categories-grid">
+      <div class="category-card">
+        <img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="เทคโนโลยี" class="category-image">
+        <div class="category-info">
+          <h4 class="category-title">เทคโนโลยีและไอที</h4>
+          <p class="category-desc">ตำแหน่งงานด้านการพัฒนาซอฟต์แวร์, วิศวกรรมเครือข่าย, วิทยาศาสตร์ข้อมูล และอื่นๆ</p>
+          <div class="category-stats">
+            <span><i class="fas fa-briefcase"></i> 1,245 ตำแหน่ง</span>
+            <span><i class="fas fa-users"></i> 5.2K กำลังสมัคร</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="category-card">
+        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="การเงิน" class="category-image">
+        <div class="category-info">
+          <h4 class="category-title">การเงินและการธนาคาร</h4>
+          <p class="category-desc">งานด้านการเงิน การบัญชี การธนาคาร การลงทุน และการจัดการความเสี่ยง</p>
+          <div class="category-stats">
+            <span><i class="fas fa-briefcase"></i> 876 ตำแหน่ง</span>
+            <span><i class="fas fa-users"></i> 3.8K กำลังสมัคร</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="category-card">
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="การตลาด" class="category-image">
+        <div class="category-info">
+          <h4 class="category-title">การตลาดและขาย</h4>
+          <p class="category-desc">ตำแหน่งงานด้านการตลาดดิจิทัล, การขาย, การวิจัยตลาด และการสื่อสารแบรนด์</p>
+          <div class="category-stats">
+            <span><i class="fas fa-briefcase"></i> 1,032 ตำแหน่ง</span>
+            <span><i class="fas fa-users"></i> 4.5K กำลังสมัคร</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="jobs" class="section">
+    <h2 class="section-title">งานที่ตรงกับคุณ</h2>
+    <!-- เพิ่ม id="matchingResultsContainer" ที่นี่ -->
+    <div class="matching-preview" id="matchingResultsContainer">
+      <div class="preview-header">
+        <h3 class="preview-title">งานแนะนำจากระบบ</h3>
+        <!-- <div class="match-percentage">ความเหมาะสม 92%</div> -->
+      </div>
+      
+      <div class="job-card">
+        <div class="job-header">
+          <!-- <div>
+            <h4 class="job-title">Frontend Developer (React)</h4>
+            <p class="job-company">บริษัท เทคโนโลยีชั้นนำ จำกัด (มหาชน)</p>
+          </div>
+          <div class="match-percentage">92%</div>
+        </div>
+        
+        <div class="job-meta">
+          <div class="job-meta-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>กรุงเทพมหานคร (แบบไฮบริด)</span>
+          </div>
+          <div class="job-meta-item">
+            <i class="fas fa-money-bill-wave"></i>
+            <span>เงินเดือน 40,000 - 60,000 บาท</span>
+          </div> -->
+        </div>
+      </div>
+    </div>
+</section>
+<script src="scripst.js"></script>
+</body>
